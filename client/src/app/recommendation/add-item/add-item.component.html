@@ -1,0 +1,166 @@
+<mat-card>
+  <mat-card-title>Add item</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="item" (ngSubmit)='onSubmit()'>
+
+      <mat-form-field class="input">
+        <mat-select [(value)]="selectedType" placeholder="type" aria-label="item type" data-cy="selectedTypeAdd">
+          <mat-option *ngFor="let type of types"
+            [value]="type.toLowerCase()"
+            #type
+            >
+            {{ type }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="input">
+        <input
+          matInput
+          aria-label="title"
+          placeholder="title"
+          type="text"
+          formControlName="title"
+          required
+          data-cy="titleAdd"
+        />
+        <mat-error
+          *ngIf="item.get('title')['errors'] && 
+            item.get('title').touched"
+        >
+          {{ getErrorMessage(item.get('title')['errors']) }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <textarea
+          ng-model="myTextarea"
+          matInput
+          aria-label="summary"
+          placeholder="summary"
+          formControlName="summary"
+          required
+          data-cy="summaryAdd"
+        ></textarea>
+        <mat-error
+          *ngIf="item.get('summary')['errors'] && 
+            item.get('summary').touched"
+        >
+          {{ getErrorMessage(item.get('summary')['errors']) }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="input">
+        <input
+          ng-model="myTextarea"
+          matInput
+          aria-label="image"
+          placeholder="image"
+          type="text"
+          formControlName="image"
+          data-cy="imageAdd"
+        />
+        <mat-error
+          *ngIf="item.get('image')['errors'] && 
+            item.get('image').touched"
+        >
+          {{ getErrorMessage(item.get('image')['errors']) }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="input">
+        <input
+          #url
+          ng-model="myTextarea"
+          matInput
+          aria-label="url"
+          placeholder="url"
+          type="url"
+          formControlName="url"
+          data-cy="url"
+        />
+        <mat-error
+          *ngIf="item.get('url')['errors'] && 
+            item.get('url').touched"
+        >
+          {{ getErrorMessage(item.get('url')['errors']) }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="selectedType === 'book'">
+        <input
+          ng-model="myTextarea"
+          matInput
+          aria-label="pages"
+          placeholder="pages"
+          type="number"
+          formControlName="pages"
+          data-cy="pagesAdd"
+        />
+        <mat-error
+          *ngIf="item.get('pages')['errors'] && 
+            item.get('pages').touched"
+        >
+          {{ getErrorMessage(item.get('pages')['errors']) }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="selectedType === 'movie'" class="input">
+        <input
+          ng-model="myTextarea"
+          matInput
+          aria-label="duration"
+          placeholder="duration"
+          type="number"
+          formControlName="duration"
+        />
+        <mat-error
+          *ngIf="item.get('duration')['errors'] && 
+            item.get('duration').touched"
+        >
+          {{ getErrorMessage(item.get('duration')['errors']) }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="selectedType === 'serie'" class="input">
+        <input
+          ng-model="myTextarea"
+          matInput
+          aria-label="number of episodes"
+          placeholder="number of episodes"
+          type="number"
+          formControlName="numberOfEpisodes"
+        />
+        <mat-error
+          *ngIf="item.get('numberOfEpisodes')['errors'] && 
+            item.get('numberOfEpisodes').touched"
+        >
+          {{ getErrorMessage(item.get('numberOfEpisodes')['errors']) }}
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+      <button
+        type='submit'
+        mat-raised-button
+        [disabled]='!item.valid'
+        data-cy="submitAdd"
+        >
+        Add Item
+      </button>
+    </form>
+    <button
+      *ngIf="url.value.includes('standaardboekhandel.be')"
+      mat-raised-button
+      (click)="fetchURL()"
+      data-cy="fetchURLButton"
+    >
+    Fetch from site
+  </button>
+  <div *ngIf="fetching">Please wait a second. Fetching information.</div>
+  <mat-error class="error" *ngIf="errorMessage" data-cy="getNewRecommendationItemError">
+    Got an error while fetching recommendation: {{ errorMessage }}. <br />
+    Please try again or contact our support with the given error and actions.
+  </mat-error>
+</mat-card-content>
+</mat-card>

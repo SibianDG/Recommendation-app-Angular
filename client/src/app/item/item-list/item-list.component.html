@@ -1,0 +1,44 @@
+<div fxLayout="column" fxLayoutGap="10%">
+
+  <h1>Get recommendations based on what you think, feel or know!</h1>
+
+  <mat-card>
+    <mat-form-field class="input">
+      <input
+        matInput
+        placeholder="Keywords"
+        type="text"
+        data-cy="keywordsInput"
+        class="input"
+        #keywords
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Type of suggestion</mat-label>
+        <mat-select [(value)]="selected">
+          <mat-option *ngFor="let type of types" [value]="type.value" >
+            {{type.key}}
+          </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <button mat-button (click)="getNewRecommendationItem(keywords.value)" data-cy="btnGetRecommendation">Get one</button>
+    <mat-error class="error" *ngIf="errorMessage" data-cy="getNewRecommendationItemError">
+      Got an error while fetching recommendation: {{ errorMessage }}. <br />
+      Please try again or contact our support with the given error and actions.
+    </mat-error>
+
+  </mat-card>
+  <mat-grid-list cols="3" rowHeight="3:2">
+    <mat-grid-tile *ngFor="let item of recommendations" class="item">
+      <app-item-detail [item]="item" data-cy="itemCard"></app-item-detail>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+
+  <ng-template #loadingOrError>
+    <span *ngIf="errorMessage; else loading"></span>
+    <ng-template #loading>
+      <mat-spinner></mat-spinner>
+    </ng-template>
+  </ng-template>
+</div>

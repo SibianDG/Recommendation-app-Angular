@@ -1,0 +1,63 @@
+@import '../../../variables';
+
+h1 {
+    color: $lightgreen;
+}
+
+mat-card {
+    background-color: $white;
+    color: $black;
+    border-radius: $borderradius;
+    mat-form-field {
+        color: $black;
+    }
+    .mat-select-value-text {
+        color: $green !important;
+    }
+}
+
+::ng-deep {
+    .mat-select-value-text {
+        color: $green !important;
+    }
+}
+
+button {
+    border: 1px $green solid;
+    margin-left: 1rem;
+}
+
+::ng-deep .mat-form-field {
+    .mat-input-element {
+        color: $green;
+    }
+    .mat-form-field-label {
+        color:  $green;
+    }
+    .mat-form-field-underline {
+        background-color:  $green;
+    }
+    .mat-form-field-ripple {
+        background-color:  $green;
+    }
+    .mat-form-field-required-marker {
+        color:  $green;
+    }
+}
+
+.error {
+    text-align: center;
+    @media (min-width: 768px) {
+        width: 50%;
+    }
+    border: 1px red solid;
+}
+
+.input {
+    margin: .5rem;
+    width: 40%;
+}
+
+.item {
+    padding: .5rem;
+}

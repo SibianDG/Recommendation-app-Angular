@@ -1,0 +1,29 @@
+@import '/src/variables';
+
+
+
+.main {
+    padding: 2rem 5rem;
+    background-color: $background;
+;
+}
+
+footer {
+    height: 3rem;
+    width: 100%;
+    background-color: $background;
+    color: $white;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    p, a {
+        margin: 0;
+    }
+}
+
+::ng-deep {
+    mat-card {
+        border: 1px $green solid;
+        margin: .5rem;
+    }
+}

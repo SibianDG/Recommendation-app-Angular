@@ -1,0 +1,24 @@
+<mat-card>
+  <form [formGroup]="keywordsFG" (ngSubmit)="onSubmit()">
+    <mat-form-field id="kwlFormField">
+      <mat-label>Give the keywords, seperated by a comma:</mat-label>
+      <input
+        matInput
+        placeholder="keywords"
+        type="text"
+        formControlName="keywordslist"
+        required
+        id="keywordslist"
+      />
+    </mat-form-field>
+    <mat-error
+    *ngIf="keywordsFG.get('keywordslist')['errors'] && 
+    keywordsFG.get('keywordslist').touched"
+    >
+      {{ getErrorMessage(keywordsFG.get('keywordslist')['errors']) }}
+    </mat-error>
+    <button type="submit" mat-raised-button [disabled]='!keywordsFG.valid'>
+      Set keywords
+    </button>
+  </form>
+</mat-card>

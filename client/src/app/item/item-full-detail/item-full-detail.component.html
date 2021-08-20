@@ -1,0 +1,26 @@
+<div class="fullDetail">
+  <h1 data-cy="title">{{item.title}}</h1>
+  <h2 data-cy="typeName"><mat-icon>{{icon}}</mat-icon>{{item.typeName}}</h2>
+  <p data-cy="summary">{{item.summary}}</p>
+  <div class="detail" *ngIf="item.typeName === 'Book' && item.pages > 0" data-cy="page">
+    <span>Pages</span>
+    {{item.pages}}
+  </div>
+  <div class="detail" *ngIf="item.typeName === 'Movie' && item.duration > 0" data-cy="duration">
+    <span>Duration</span>
+    {{item.duration}}
+  </div>
+  <div class="detail" *ngIf="item.typeName === 'Serie' && item.numberOfEpisodes > 0" data-cy="numberOfEpisodes">
+    <span>Number of episodes</span>
+    {{item.numberOfEpisodes}}
+  </div>
+  <div class="image-item" *ngIf="item.image != null && item.image != ''" data-cy="duration">
+    <span>Image</span>
+    <br>
+    <img src="{{item.image}}" alt="{{item.title}}" class="front">
+  </div>
+  <button mat-button color="primary" mat-raised-button (click)="wantEdit()" [disabled]="error" data-cy="edit"><mat-icon>edit</mat-icon></button>
+  <app-edit-item *ngIf="edit" [item]="item" (editedItem)="editItem($event)" data-cy="app-edit-item"></app-edit-item>
+  <div *ngIf="successMessage">{{successMessage}}</div>
+  <mat-error class="error" *ngIf="error" data-cy="errorFullDetail">{{error}}</mat-error>
+</div>

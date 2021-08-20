@@ -1,0 +1,13 @@
+.m-1 {
+    margin: .5rem;
+    width: 35%;
+}
+
+.center {
+    text-align: center;
+    .m-1 {
+        flex-grow: 1;
+        margin: .5rem;
+        width: 35%;
+    }
+}

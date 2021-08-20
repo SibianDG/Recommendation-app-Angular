@@ -1,0 +1,30 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{item.title}}</mat-card-title>
+    <mat-card-subtitle><strong>{{item.typeName}}</strong></mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="summary m-0">
+      <span>Summary</span>{{item.summary}}
+    </div>
+    <div class="detail" *ngIf="item.typeName === 'Book' && item.pages > 0">
+      <span>Pages</span>
+      {{item.pages}}
+    </div>
+    <div class="detail" *ngIf="item.typeName === 'Movie' && item.duration > 0">
+      <span>Duration</span>
+      {{item.duration}}
+    </div>
+    <div class="detail" *ngIf="item.typeName === 'Serie' && item.numberOfEpisodes > 0">
+      <span>Number of episodes</span>
+      {{item.numberOfEpisodes}}
+    </div>
+    <div class="image-item" *ngIf="item.image != null && item.image != ''">
+      <span>Image</span>
+      {{item.image}}
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button color="warn" (click)="deleteItem()"><mat-icon>delete</mat-icon></button>
+  </mat-card-actions>
+</mat-card>

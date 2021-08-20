@@ -1,0 +1,149 @@
+<mat-card>
+  <mat-card-title>Edit item</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="editItemForm" (ngSubmit)='onSubmit()' class="center">
+
+      <mat-form-field class="m-1">
+        <mat-select [(value)]="selectedType" placeholder="type" aria-label="item type" data-cy="selectedTypeAdd">
+          <mat-option *ngFor="let type of types"
+            [value]="type"
+            #type
+            >
+            {{ type }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="m-1">
+        <input
+          matInput
+          aria-label="title"
+          placeholder="title"
+          type="text"
+          formControlName="title"
+          required
+          data-cy="titleAdd"
+        />
+        <mat-error
+          *ngIf="editItemForm.get('title')['errors'] && 
+          editItemForm.get('title').touched"
+        >
+          {{ getErrorMessage(editItemForm.get('title')['errors']) }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="m-1">
+        <textarea
+          ng-model="myTextarea"
+          matInput
+          aria-label="summary"
+          placeholder="summary"
+          formControlName="summary"
+          required
+          data-cy="summaryAdd"
+        ></textarea>
+        <mat-error
+          *ngIf="editItemForm.get('summary')['errors'] && 
+          editItemForm.get('summary').touched"
+        >
+          {{ getErrorMessage(editItemForm.get('summary')['errors']) }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="m-1">
+        <input
+          ng-model="myTextarea"
+          matInput
+          aria-label="image"
+          placeholder="image"
+          type="text"
+          formControlName="image"
+        />
+        <mat-error
+          *ngIf="editItemForm.get('image')['errors'] && 
+          editItemForm.get('image').touched"
+        >
+          {{ getErrorMessage(editItemForm.get('image')['errors']) }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="m-1">
+        <input
+          ng-model="myTextarea"
+          matInput
+          aria-label="url"
+          placeholder="url"
+          type="url"
+          formControlName="url"
+        />
+        <mat-error
+          *ngIf="editItemForm.get('url')['errors'] && 
+          editItemForm.get('url').touched"
+        >
+          {{ getErrorMessage(editItemForm.get('url')['errors']) }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="selectedType === 'book'" class="m-1">
+        <input
+          ng-model="myTextarea"
+          matInput
+          aria-label="pages"
+          placeholder="pages"
+          type="number"
+          formControlName="pages"
+        />
+        <mat-error
+          *ngIf="editItemForm.get('pages')['errors'] && 
+          editItemForm.get('pages').touched"
+        >
+          {{ getErrorMessage(editItemForm.get('pages')['errors']) }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="selectedType === 'movie'" class="m-1">
+        <input
+          ng-model="myTextarea"
+          matInput
+          aria-label="duration"
+          placeholder="duration"
+          type="number"
+          formControlName="duration"
+        />
+        <mat-error
+          *ngIf="editItemForm.get('duration')['errors'] && 
+          editItemForm.get('duration').touched"
+        >
+          {{ getErrorMessage(editItemForm.get('duration')['errors']) }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="selectedType === 'serie'" class="m-1">
+        <input
+          ng-model="myTextarea"
+          matInput
+          aria-label="number of episodes"
+          placeholder="number of episodes"
+          type="number"
+          formControlName="numberOfEpisodes"
+        />
+        <mat-error
+          *ngIf="editItemForm.get('numberOfEpisodes')['errors'] && 
+          editItemForm.get('numberOfEpisodes').touched"
+        >
+          {{ getErrorMessage(editItemForm.get('numberOfEpisodes')['errors']) }}
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+      <button
+        type='submit'
+        mat-raised-button
+        [disabled]='!editItemForm.valid'
+        data-cy="submitAdd"
+        >
+        Edit Item
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>

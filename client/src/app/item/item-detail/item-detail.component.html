@@ -1,0 +1,28 @@
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{item.title}}</mat-card-title>
+    <mat-card-subtitle><strong><mat-icon>{{icon}}</mat-icon>{{icon}}|{{item.typeName}}</strong></mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="summary m-0">
+      <span>Summary</span>{{item.summary.slice(0, 150)+"..."}}
+    </div>
+    <div class="detail" *ngIf="item.typeName === 'Book' && item.pages > 0">
+      <span>Pages</span>
+      {{item.pages}}
+    </div>
+    <div class="detail" *ngIf="item.typeName === 'Movie' && item.duration > 0">
+      <span>Duration</span>
+      {{item.duration}}
+    </div>
+    <div class="detail" *ngIf="item.typeName === 'Serie' && item.numberOfEpisodes > 0">
+      <span>Number of episodes</span>
+      {{item.numberOfEpisodes}}
+    </div>
+  </mat-card-content>
+  <mat-card-actions class="m-0">
+    <button mat-button color="warn" (click)="deleteRecommendation()" data-cy="removeItem"><mat-icon>delete</mat-icon></button>
+    <a href={{link}}><button mat-button color="primary" data-cy="infoRecommendation"><mat-icon>info</mat-icon></button></a>
+  </mat-card-actions>
+</mat-card>

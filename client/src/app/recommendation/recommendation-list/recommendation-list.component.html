@@ -1,0 +1,45 @@
+<h1>Add a new recommendation.</h1>
+<app-add-recommendation (newKeywords)="addNewKeywords($event)"></app-add-recommendation>
+<div class="c-white">
+  <app-recommendation-detail [keywords]="keywords"></app-recommendation-detail>
+</div>
+<app-add-item (newItem)="addNewItem($event)"></app-add-item>
+<div fxLayout="column" fxLayoutGap="2%">
+  <mat-card *ngIf="items.length > 0">
+    <mat-form-field>
+      <input
+        matInput
+        (keyup)="filterItem$.next($event.target.value)"
+        placeholder="Filter items"
+        type="text"
+        #filterItems
+      />
+    </mat-form-field>
+  </mat-card>
+
+  <div
+    fxLayout="row wrap"
+    fxLayout.xs="column"
+    fxLayoutGap="0.5%"
+    fxLayoutAlign="start"
+  >
+    <div
+      class="item"
+      *ngFor="let item of (items | recommendationItemFilter: filterItemName)"
+      fxFlex="0 0 calc(25%-0.5%)"
+      fxFlex.xs="100%"
+    >
+      <app-recommendation-item-detail [item]="item"></app-recommendation-item-detail>
+    </div>
+  </div>
+</div>
+
+<mat-card>
+  <button (click)="addThisRecommendation()" mat-raised-button [disabled]="!isRecommendationValid" data-cy="btnAddFullRecommendation">
+    Add this recommendation
+  </button>
+  <mat-error class="error" data-cy="addThisRecommendationError" *ngIf="addNewRecommendationString && addNewRecommendationString.includes('Failed')">
+    {{ addNewRecommendationString }}
+  </mat-error>
+  <p *ngIf="addNewRecommendationString && !addNewRecommendationString.includes('Failed')" data-cy="addThisRecommendationSuccess">{{ addNewRecommendationString }}</p>
+</mat-card>

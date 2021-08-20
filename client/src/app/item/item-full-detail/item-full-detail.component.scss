@@ -1,0 +1,15 @@
+.fullDetail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.front {
+    height: 400px;
+    width: auto;
+}
+
+.error {
+    margin: .5rem;
+}

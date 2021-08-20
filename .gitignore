@@ -1,0 +1,10 @@
+/client/.idea
+/client/node_modules
+/.idea
+/Server/Api/.idea
+
+Server/Api/recommendationsystemdb.db
+
+/Server/Api/.*
+
+*.db

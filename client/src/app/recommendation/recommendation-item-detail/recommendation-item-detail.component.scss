@@ -1,0 +1,8 @@
+@import '/src/variables';
+
+::ng-deep {
+    mat-card {
+        border: 1px $green solid;
+        margin: .25rem;
+    }
+}
